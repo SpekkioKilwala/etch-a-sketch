@@ -1,3 +1,52 @@
 body {
     background-color: brown;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0px;
+}
+
+h1 {
+    font-family:'Courier New', Courier, monospace;
+    font-style: oblique;
+    color: silver;
+}
+
+/* #gameAlignment {
+    border: 1px dotted black;
+} */
+
+#drawArea {
+    border: 6px solid black;
+    border-radius: 10px;
+    height: 70vh;
+    aspect-ratio: 1;
+}
+
+#knobs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 10px;
+}
+
+button {
+    font-size: 20px;
+}
+
+.knob {
+    border: 4px solid antiquewhite;
+    background-color: rgb(226, 197, 158);
+    border-radius: 5vh;
+    height: 10vh;
+    aspect-ratio: 1;
+    margin: 30px;
 }
