@@ -31,7 +31,7 @@ h1 {
 
 .cell {
     border: 2px dotted blue;
-    width: 30px;
+    min-width: 10px;
     aspect-ratio: 1;
 }
 
