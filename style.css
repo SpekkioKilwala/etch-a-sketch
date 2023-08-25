@@ -32,6 +32,17 @@ h1 {
     justify-content: space-between;
 }
 
+.column {
+    border: 2px solid orange;
+    display: flex;
+}
+
+.cell {
+    border: 2px dotted blue;
+    width: 30px;
+    aspect-ratio: 1;
+}
+
 .knob {
     border: 4px solid antiquewhite;
     background-color: rgb(226, 197, 158);
