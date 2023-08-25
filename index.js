@@ -25,7 +25,7 @@ function createGrid(sideLength) {
         const cell = document.createElement('div');
         cell.setAttribute('class', 'cell');
         setBackgroundColor(cell, strHSL(initialColor));
-        cell.addEventListener('click', () => {console.log(cell)});
+        cell.addEventListener('click', () => {darken(cell)});
         column.appendChild(cell);
     }
     // finally style the column and add it to the div
@@ -56,13 +56,17 @@ function setBackgroundColor(element, color) {
 
 function darken(element) {
   const newColor = shiftHSL(getColor(element), [0, 0, -7.5]);
+  console.log(newColor);
   setBackgroundColor(element, newColor);
 }
 
 function getColor(element){
   // note that this CAN'T grab what's in the CSS, only
   // what was assigned by the JS.
+  // worse yet, this seems to only return it as an RGB.
   const hsl = element.style.backgroundColor;
+  console.log(hsl);
+  console.log(toHSLArray(hsl));
   return toHSLArray(hsl);
 }
 
@@ -82,3 +86,21 @@ function shiftHSL(initial, shift) {
   console.log(`Can't shift HSL: ${initial} ${shift}`)
   return initial
 }
+
+// function RGBToHSL(rgb) {
+//   let sep = rgb.indexOf(",") > -1 ? "," : " ";
+//   rgb = rgb.substr(4).split(")")[0].split(sep);
+
+//   for (let R in rgb) {
+//     let r = rgb[R];
+//     if (r.indexOf("%") > -1) 
+//       rgb[R] = Math.round(r.substr(0,r.length - 1) / 100 * 255);
+//   }
+
+//   // Make r, g, and b fractions of 1
+//   let r = rgb[0] / 255,
+//       g = rgb[1] / 255,
+//       b = rgb[2] / 255;
+
+//   ...
+// }
