@@ -1,7 +1,9 @@
 "use strict";
 
 const drawArea = document.querySelector('#drawArea');
-// console.log(drawArea);
+const btClear = document.querySelector('#btClear');
+const btResize = document.querySelector('#btResize');
+
 let sideLength = 16;
 const initialColor = [192, 192, 192]; // rgb
 const finalColor = [0, 0, 0]; // still rgb
@@ -10,6 +12,7 @@ const simpleDarken = deriveSimpleDarken(initialColor, finalColor, numSteps);
 const colorIncrements = 10;
 
 createGrid(sideLength);
+btClear.addEventListener('click', () => {createGrid(sideLength);});
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
