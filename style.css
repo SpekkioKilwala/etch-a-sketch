@@ -23,6 +23,7 @@ h1 {
     border-radius: 10px;
     height: 70vh;
     aspect-ratio: 1;
+    display: flex;
 }
 
 #knobs {
