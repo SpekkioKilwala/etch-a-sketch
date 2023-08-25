@@ -13,6 +13,8 @@ createGrid(sideLength);
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
+const toHSLArray = hslStr => hslStr.match(/\d+/g).map(Number);
+
 function createGrid(sideLength) {
   deleteChildren(drawArea);
   for (let x = 0; x < sideLength; x++) {
@@ -23,6 +25,7 @@ function createGrid(sideLength) {
         const cell = document.createElement('div');
         cell.setAttribute('class', 'cell');
         setBackgroundColor(cell, strHSL(initialColor));
+        cell.addEventListener('click', () => {console.log(cell)});
         column.appendChild(cell);
     }
     // finally style the column and add it to the div
@@ -46,26 +49,36 @@ function strHSL(color) {
 
 function setBackgroundColor(element, color) {
   // given an element and any valid CSS-type color, stick it on
+  // be aware that this being a super-specific rule it seems
+  // to OVERRIDE the general :hover rule
   element.setAttribute('style', `background-color: ${color};`)
 }
 
-function interpolatedStep(initial, min, max, numSteps) {
-  // We have a number scale with limits of min and max,
-  // and an initial value that is hopefully somewhere within that scale.
-  // The distance between min and max has numSteps divisions (or steps).
-  // returns (interpolatedStep + one step) capped to min, max.
-  const step = (max - min)/numSteps;
-  // clamp() needs min < max, so swap values for that
-  if (min > max) {
-    max = [min, min = max][0];
+function darken(element) {
+  const newColor = shiftHSL(getColor(element), [0, 0, -7.5]);
+  setBackgroundColor(element, newColor);
+}
+
+function getColor(element){
+  // note that this CAN'T grab what's in the CSS, only
+  // what was assigned by the JS.
+  const hsl = element.style.backgroundColor;
+  return toHSLArray(hsl);
+}
+
+function shiftHSL(initial, shift) {
+  // given a HSL [A, B, C] and a modification to that [D E F]
+  // return [A+D%360, B+E, C+F]
+  // in the initial version this will usually be used with [0, 0, -7.5]
+  if ((initial.length == 3) && (shift.length == 3)) {
+    let h = initial[0] + shift[0];
+    h = ((h % 360) + 360) % 360; // h has a valid range 0-360
+    let s = initial[1] + shift[1];
+    s = clamp(s, 0, 100);
+    let l = initial[2] + shift[2];
+    l = clamp(l, 0, 100);
+    return [h, s, l];
   }
-  return clamp((initial + step), min, max);
-}
-
-function colorStep(value) {
-  return interpolatedStep(value, initialColor, finalColor, colorIncrements)
-}
-
-function darkenColor(initial) {
-  return initial.map(colorStep)
+  console.log(`Can't shift HSL: ${initial} ${shift}`)
+  return initial
 }
