@@ -14,33 +14,31 @@ h1 {
     color: silver;
 }
 
-/* #gameAlignment {
-    border: 1px dotted black;
-} */
-
 #drawArea {
     border: 6px solid black;
     border-radius: 10px;
     height: 70vh;
     aspect-ratio: 1;
     display: flex;
-}
-
-#knobs {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    padding: 10px;
 }
 
 .column {
     border: 2px solid orange;
     display: flex;
+    flex-direction: column;
 }
 
 .cell {
     border: 2px dotted blue;
     width: 30px;
     aspect-ratio: 1;
+}
+
+#knobs {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .knob {
@@ -52,5 +50,9 @@ h1 {
     margin: 30px;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.label {
     text-align: center;
 }
