@@ -26,13 +26,15 @@ h1 {
 .column {
     border: 2px solid orange;
     display: flex;
+    flex-basis: 30px;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .cell {
     border: 2px dotted blue;
-    min-width: 10px;
-    aspect-ratio: 1;
+    flex-basis: 30px;
+    flex-grow: 1;
 }
 
 #knobs {

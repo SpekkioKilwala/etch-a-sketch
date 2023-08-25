@@ -2,7 +2,7 @@
 
 const drawArea = document.querySelector('#drawArea');
 // console.log(drawArea);
-let sideLength = 4;
+let sideLength = 12;
 
 createGrid(sideLength);
 
