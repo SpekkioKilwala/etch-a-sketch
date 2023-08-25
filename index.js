@@ -3,8 +3,10 @@
 const drawArea = document.querySelector('#drawArea');
 // console.log(drawArea);
 let sideLength = 16;
-const initialColor = [192, 192, 192]; // rgb
-const finalColor = [0, 0, 0]; // still rgb
+// const initialColor = [192, 192, 192]; // rgb
+// const finalColor = [0, 0, 0]; // still rgb
+const initialColor = [0, 0, 75] // hsl
+const finalColor = [0, 0, 0] // hsl
 const colorIncrements = 10;
 
 createGrid(sideLength);
@@ -20,6 +22,7 @@ function createGrid(sideLength) {
         // create, style, and append all the children to that column
         const cell = document.createElement('div');
         cell.setAttribute('class', 'cell');
+        setBackgroundColor(cell, strHSL(initialColor));
         column.appendChild(cell);
     }
     // finally style the column and add it to the div
@@ -32,11 +35,18 @@ function deleteChildren(element) {
   while (element.hasChildNodes()) {element.removeChild(element.firstChild)}
 }
 
-function strRGB(color) {
-  // given a RGB colour like [192, 192, 192]
-  // return the string "rgb(226, 197, 158)" WITHOUT the semicolon.
-  // (because I'll be using this in backtick formatted strings, semicolon is easy to add.)
-  return `rgb(${color.join(", ")})`
+function strHSL(color) {
+  // given an HSL colour like [0, 0, 75] (meaning 0, 0%, 75%)
+  // return the string hsl(0, 0%, 75%);
+  // in this case the first value hue is 0-300something, the others are 0-1
+  if (color.length == 3) {
+    return `hsl(${color[0]}, ${color[1]}%, ${color[2]}%)`;
+  }
+}
+
+function setBackgroundColor(element, color) {
+  // given an element and any valid CSS-type color, stick it on
+  element.setAttribute('style', `background-color: ${color};`)
 }
 
 function interpolatedStep(initial, min, max, numSteps) {
