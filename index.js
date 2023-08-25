@@ -13,6 +13,7 @@ const colorIncrements = 10;
 
 createGrid(sideLength);
 btClear.addEventListener('click', () => {createGrid(sideLength);});
+btResize.addEventListener('click', () => {resizeGrid();});
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
@@ -35,6 +36,17 @@ function createGrid(sideLength) {
     // finally style the column and add it to the div
     column.setAttribute('class', 'column')
     drawArea.appendChild(column);
+  }
+}
+
+function resizeGrid() {
+  let newSize = +prompt("How many cells on an edge? (1-100)");
+  if ((newSize < 1) || (newSize > 100)) {
+    alert("Invalid size, making no changes.");
+  }
+  else {
+    sideLength = Math.floor(newSize);
+    createGrid(sideLength);
   }
 }
 
